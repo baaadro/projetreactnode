@@ -5,9 +5,9 @@ Une application web complète permettant aux étudiants de déclarer leurs stage
 ## Fonctionnalités
 
 ### Pour les étudiants :
-- ✅ Création de compte étudiant
-- 📝 Déclaration de stage (entreprise, sujet, dates)
-- 📊 Consultation du statut (en attente/validé/refusé)
+-  Création de compte étudiant
+-  Déclaration de stage (entreprise, sujet, dates)
+-  Consultation du statut (en attente/validé/refusé)
 
 ### Pour l'administration :
 -  Connexion avec compte administrateur
