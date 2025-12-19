@@ -51,7 +51,8 @@ cd plateforme-stages-etudiants
 
 mysql -u root -p (vote password)
 
-Éxécuter ce script
+le script server.js le moment ou le backend est started, crée cette database utilisant ce script
+mais vous pouvez la créer manuellement.
 ```
 CREATE DATABASE stage_platform;
 USE stage_platform;
