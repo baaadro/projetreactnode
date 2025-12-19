@@ -20,13 +20,25 @@ const dbConfig = {
 };
 
 let db;
+let dbInitialized = false;
 
 // Connexion à MySQL
 async function connectDB() {
     try {
-        db = await mysql.createConnection(dbConfig);
+        const connection = await mysql.createConnection({
+            host: 'localhost',
+            user: 'root',
+            password: '123456'
+        });
+
         console.log('✅ Connecté à MySQL');
         
+        // créer la database
+        await connection.execute(`CREATE DATABASE IF NOT EXISTS stage_platform`);
+        await connection.end();
+
+        db = await mysql.createConnection(dbConfig);
+        console.log('✅ Connecté à MySQL & base créée');
         // Créer les tables si elles n'existent pas
         await initDatabase();
     } catch (error) {
@@ -38,6 +50,7 @@ async function connectDB() {
 
 // Initialisation de la base de données
 async function initDatabase() {
+    if (dbInitialized) return;
     try {
         // Créer la table users
         await db.execute(`
@@ -72,12 +85,13 @@ async function initDatabase() {
             const hashedPassword = await bcrypt.hash('admin123', 10);
             await db.execute(
                 'INSERT INTO users (nom, email, password, role) VALUES (?, ?, ?, ?)',
-                ['Administrateur', 'admin@example.com', $2a$10$Bn55mvJqio2lK2ULeEClAOUHwjp/iF21OVEdNg7i9EUD41.eoJolu, 'admin']
+                ['Administrateur', 'admin@example.com', "$2a$10$Bn55mvJqio2lK2ULeEClAOUHwjp/iF21OVEdNg7i9EUD41.eoJolu", 'admin']
             );
             console.log('✅ Admin créé: admin@example.com / admin123');
         }
         
         console.log('✅ Base de données initialisée');
+        dbInitialized = true;
     } catch (error) {
         console.error('❌ Erreur d\'initialisation:', error.message);
     }
