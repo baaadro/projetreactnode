@@ -83,11 +83,24 @@ CREATE TABLE stages (
 INSERT INTO users (nom, email, password, role) 
 VALUES ('Administrateur', 'admin@example.com', '$2a$10$Bn55mvJqio2lK2ULeEClAOUHwjp/iF21OVEdNg7i9EUD41.eoJolu', 'admin');
 ```
+
+
 ### Étape 3 : Configurer le backend
 ```
 cd backend
 npm install
 ```
+Modifier backend\server.js 
+```
+// Configuration MySQL - MODIFIEZ CES INFORMATIONS
+const dbConfig = {
+    host: 'localhost',
+    user: 'root',      // Votre utilisateur MySQL
+    password: '123456',      // Votre mot de passe MySQL
+    database: 'stage_platform'
+};
+```
+
 ### Étape 4 : Configurer le frontend
 ```
 cd frontend
